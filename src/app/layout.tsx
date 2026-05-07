@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { getContactInfo } from '../../sanity/lib/queries'
+import { Analytics } from '@vercel/analytics/next'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -139,6 +140,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer cms={contact} />
           <WhatsAppButton />
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   )
