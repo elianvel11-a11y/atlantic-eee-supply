@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* v3 */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Font system */
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: ui-monospace, 'Courier New', monospace;
+
+  /* Corporate color system — 60% light / 25% navy / 15% blue */
+  --color-navy: #0C1C36;
+  --color-navy-mid: #162D55;
+  --color-navy-deep: #060F1E;
+  --color-offwhite: #F5F4F1;
+  --color-chalk: #EBEAE6;
+  --color-frame: #D5D3CD;
+
+  /* Text colors */
+  --color-ink: #181614;
+  --color-copy: #3A3836;
+  --color-stone: #716D67;
+
+  /* Corporate blue accent */
+  --color-corp-blue: #1A5298;
+
+  /* Legacy — kept for SVG map and WhatsApp */
+  --color-blue-accent: #5BA4E5;
+  --color-slate-maritime: #8B9BB4;
+  --color-green-accent: #22C55E;
+
+  /* shadcn tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #181614;
+  --card: #FFFFFF;
+  --card-foreground: #181614;
+  --popover: #FFFFFF;
+  --popover-foreground: #181614;
+  --primary: #0C1C36;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F4F1;
+  --secondary-foreground: #181614;
+  --muted: #EBEAE6;
+  --muted-foreground: #716D67;
+  --accent: #1A5298;
+  --accent-foreground: #FFFFFF;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(24, 22, 20, 0.1);
+  --input: rgba(24, 22, 20, 0.07);
+  --ring: #1A5298;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { @apply scroll-smooth; }
+  body {
+    background: #FFFFFF;
+    color: #181614;
+    font-family: var(--font-body), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display), system-ui, sans-serif; }
+  .font-body    { font-family: var(--font-body), system-ui, sans-serif; }
+  .font-accent  { font-family: var(--font-accent), Georgia, serif; }
+
+  /* Section label — corporate */
+  .section-label {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #1A5298;
+    margin-bottom: 1.25rem;
+  }
+  .section-label-light {
+    display: block;
+    font-family: var(--font-body), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(91, 164, 229, 0.65);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Glass — reserved for map command interface only */
+  .glass-map {
+    background: rgba(6, 8, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Legacy glass kept for map SVG nodes */
+  .glass {
+    background: rgba(12, 12, 16, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .glass-light {
+    background: rgba(24, 24, 31, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Legacy label-tag kept for map section */
+  .label-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body), sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8B9BB4;
+  }
+}
+
+/* Leaflet — dark theme for map command interface */
+.leaflet-container { background: #07070C !important; }
+.leaflet-control-attribution {
+  background: rgba(7, 7, 12, 0.9) !important;
+  color: rgba(139, 155, 180, 0.6) !important;
+  font-size: 9px !important;
+}
+.leaflet-control-attribution a { color: #5BA4E5 !important; }
+.leaflet-control-zoom a {
+  background: rgba(12, 28, 54, 0.92) !important;
+  color: rgba(240, 240, 245, 0.8) !important;
+  border-color: rgba(91, 164, 229, 0.2) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: rgba(22, 45, 85, 0.95) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #EBEAE6; }
+::-webkit-scrollbar-thumb { background: #C8C6C0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #1A5298; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

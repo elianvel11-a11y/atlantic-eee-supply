@@ -1,0 +1,13 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm ci",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "@sanity_project_id",
+    "NEXT_PUBLIC_SANITY_DATASET": "@sanity_dataset",
+    "NEXT_PUBLIC_SITE_URL": "@site_url",
+    "SANITY_API_READ_TOKEN": "@sanity_api_read_token"
+  }
+}
