@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Phone, Mail, MessageCircle, MapPin, ExternalLink, Send, CheckCircle2 } from 'lucide-react'
+import { Phone, Mail, MessageCircle, MapPin, ExternalLink, Send, CheckCircle2, Paperclip } from 'lucide-react'
 import PageHero from '@/components/ui/PageHero'
 import { useLanguage } from '@/lib/LanguageContext'
 import { t, getText } from '@/lib/translations'
@@ -14,12 +14,22 @@ const CATEGORIES = [
   'Hose & Couplings', 'Rope & Hawsers', 'Electrical Equipment', 'Other',
 ]
 
+const L = {
+  vesselName:    { en: 'Vessel name',          es: 'Nombre del buque' },
+  imoNumber:     { en: 'IMO number',           es: 'Número IMO' },
+  portOfCall:    { en: 'Port of call',         es: 'Puerto de escala' },
+  deliveryDate:  { en: 'Required delivery date', es: 'Fecha de entrega requerida' },
+  attachment:    { en: 'Attach requisition (PDF / Word)', es: 'Adjuntar requisición (PDF / Word)' },
+  attachPh:      { en: 'No file selected',     es: 'Ningún archivo seleccionado' },
+}
+
 // ─── Quote form ───────────────────────────────────────────────────────────────
 function QuoteForm() {
   const { lang } = useLanguage()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle')
+  const [fileName, setFileName] = useState('')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -32,7 +42,7 @@ function QuoteForm() {
         body: data,
         headers: { Accept: 'application/json' },
       })
-      if (res.ok) { setStatus('success'); form.reset() }
+      if (res.ok) { setStatus('success'); form.reset(); setFileName('') }
       else setStatus('idle')
     } catch { setStatus('idle') }
   }
@@ -111,7 +121,12 @@ function QuoteForm() {
                 <p className="font-display font-semibold text-ink text-xl">{getText(t.quote.success, lang)}</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white border border-ink/[0.08] rounded-xl p-8 flex flex-col gap-4">
+              <form
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+                className="bg-white border border-ink/[0.08] rounded-xl p-8 flex flex-col gap-4"
+              >
+                {/* Row 1: Name + Company */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="font-body text-[12px] text-copy/70 tracking-wide">{getText(t.quote.name, lang)}</label>
@@ -119,9 +134,11 @@ function QuoteForm() {
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="font-body text-[12px] text-copy/70 tracking-wide">{getText(t.quote.company, lang)}</label>
-                    <input name="company" type="text" placeholder={lang === 'es' ? 'Empresa o buque' : 'Company or vessel'} className={inputClass} />
+                    <input name="company" type="text" placeholder={lang === 'es' ? 'Empresa o compañía' : 'Company'} className={inputClass} />
                   </div>
                 </div>
+
+                {/* Row 2: Email + Phone */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="font-body text-[12px] text-copy/70 tracking-wide">{getText(t.quote.email, lang)}</label>
@@ -132,6 +149,41 @@ function QuoteForm() {
                     <input name="phone" type="tel" placeholder="+507 ..." className={inputClass} />
                   </div>
                 </div>
+
+                {/* Divider — vessel details */}
+                <div className="flex items-center gap-3 pt-1">
+                  <div className="flex-1 h-px bg-ink/[0.08]" />
+                  <span className="font-body text-[10px] tracking-[0.18em] uppercase text-stone/50">
+                    {lang === 'es' ? 'Datos del buque' : 'Vessel details'}
+                  </span>
+                  <div className="flex-1 h-px bg-ink/[0.08]" />
+                </div>
+
+                {/* Row 3: Vessel name + IMO */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-body text-[12px] text-copy/70 tracking-wide">{L.vesselName[lang]}</label>
+                    <input name="vessel_name" type="text" placeholder={lang === 'es' ? 'M/V Nombre del buque' : 'M/V Vessel name'} className={inputClass} />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-body text-[12px] text-copy/70 tracking-wide">{L.imoNumber[lang]}</label>
+                    <input name="imo_number" type="text" placeholder="IMO 1234567" pattern="\d{7}" title="7-digit IMO number" className={inputClass} />
+                  </div>
+                </div>
+
+                {/* Row 4: Port + Delivery date */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-body text-[12px] text-copy/70 tracking-wide">{L.portOfCall[lang]}</label>
+                    <input name="port_of_call" type="text" placeholder={lang === 'es' ? 'Puerto de escala' : 'e.g. Colón, Balboa'} className={inputClass} />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="font-body text-[12px] text-copy/70 tracking-wide">{L.deliveryDate[lang]}</label>
+                    <input name="delivery_date" type="date" className={inputClass} />
+                  </div>
+                </div>
+
+                {/* Category */}
                 <div className="flex flex-col gap-1.5">
                   <label className="font-body text-[12px] text-copy/70 tracking-wide">{getText(t.quote.category, lang)}</label>
                   <select name="category" className={inputClass}>
@@ -139,6 +191,8 @@ function QuoteForm() {
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
+
+                {/* Message */}
                 <div className="flex flex-col gap-1.5">
                   <label className="font-body text-[12px] text-copy/70 tracking-wide">{getText(t.quote.message, lang)}</label>
                   <textarea
@@ -148,6 +202,26 @@ function QuoteForm() {
                     className={inputClass + ' resize-none'}
                   />
                 </div>
+
+                {/* File upload */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="font-body text-[12px] text-copy/70 tracking-wide">{L.attachment[lang]}</label>
+                  <label className="flex items-center gap-3 px-4 py-3 border border-ink/[0.15] rounded-sm bg-white cursor-pointer hover:border-corp-blue/40 transition-colors group">
+                    <Paperclip size={14} className="text-stone group-hover:text-corp-blue transition-colors flex-shrink-0" />
+                    <span className="font-body text-[13px] text-stone/60 truncate">
+                      {fileName || L.attachPh[lang]}
+                    </span>
+                    <input
+                      name="attachment"
+                      type="file"
+                      accept=".pdf,.doc,.docx,.xls,.xlsx"
+                      className="sr-only"
+                      onChange={(e) => setFileName(e.target.files?.[0]?.name ?? '')}
+                    />
+                  </label>
+                  <p className="font-body text-[11px] text-stone/40">PDF, Word, or Excel — max 10 MB</p>
+                </div>
+
                 <button
                   type="submit"
                   disabled={status === 'sending'}

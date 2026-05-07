@@ -45,6 +45,28 @@ export const category = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name:  'gallery',
+      title: 'Product gallery',
+      description: 'Additional photos showing products or applications in this category.',
+      type:  'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'image',     title: 'Photo',            type: 'image', options: { hotspot: true } },
+          { name: 'captionEn', title: 'Caption (English)', type: 'string' },
+          { name: 'captionEs', title: 'Caption (Spanish)', type: 'string' },
+        ],
+        preview: { select: { media: 'image', title: 'captionEn' } },
+      }],
+    }),
+    defineField({
+      name:  'relatedBrands',
+      title: 'Related brands',
+      description: 'Brands supplying products in this category.',
+      type:  'array',
+      of: [{ type: 'reference', to: [{ type: 'brand' }] }],
+    }),
+    defineField({
       name:  'order',
       title: 'Display order',
       type:  'number',

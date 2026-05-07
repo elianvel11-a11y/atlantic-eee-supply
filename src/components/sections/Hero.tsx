@@ -14,10 +14,10 @@ interface HeroProps {
 export default function Hero({ cms }: HeroProps) {
   const { lang } = useLanguage()
 
-  const badge        = pick(cms?.badge,        t.hero.badge,    lang)
-  const headline     = pick(cms?.headline,     t.hero.headline, lang)
-  const subheading   = pick(cms?.subheading,   t.hero.sub,      lang)
-  const ctaPrimary   = pick(cms?.ctaPrimary,   t.hero.cta,      lang)
+  const badge        = pick(cms?.badge,        t.hero.badge,        lang)
+  const headline     = pick(cms?.headline,     t.hero.headline,     lang)
+  const subheading   = pick(cms?.subheading,   t.hero.sub,          lang)
+  const ctaPrimary   = pick(cms?.ctaPrimary,   t.hero.cta,          lang)
   const ctaSecondary = pick(cms?.ctaSecondary, t.hero.ctaSecondary, lang)
 
   const stats = cms?.stats?.length
@@ -26,18 +26,32 @@ export default function Hero({ cms }: HeroProps) {
         label: (lang === 'es' ? s.labelEs : s.labelEn) ?? '',
       }))
     : [
-        { value: '12',                          label: getText(t.hero.stat1, lang) },
-        { value: getText(t.hero.stat3v, lang),  label: getText(t.hero.stat2, lang) },
-        { value: '2',                            label: lang === 'es' ? 'Oficinas en Panamá' : 'Offices in Panama' },
+        { value: '12',                         label: getText(t.hero.stat1, lang) },
+        { value: getText(t.hero.stat3v, lang), label: getText(t.hero.stat2, lang) },
+        { value: '2',                          label: lang === 'es' ? 'Oficinas en Panamá' : 'Offices in Panama' },
       ]
+
+  const isVideo = cms?.backgroundType === 'video' && !!cms.backgroundVideoUrl
+  const bgImageUrl = cms?.backgroundImageUrl ?? '/images/hero-port-3.jpg'
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/hero-port-3.jpg)' }}
-      />
+      {/* Background media */}
+      {isVideo ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src={cms!.backgroundVideoUrl!}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      ) : (
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${bgImageUrl})` }}
+        />
+      )}
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-navy-deep/65" />

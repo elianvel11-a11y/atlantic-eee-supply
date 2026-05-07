@@ -18,23 +18,45 @@ export function pick(
 // ── CMS payload types ─────────────────────────────────────────────────────────
 
 export type CmsHero = {
-  badge?:         BiL
-  headline?:      BiL
-  subheading?:    BiL
-  ctaPrimary?:    BiL
-  ctaSecondary?:  BiL
-  backgroundImage?: string | null
+  badge?:               BiL
+  headline?:            BiL
+  subheading?:          BiL
+  ctaPrimary?:          BiL
+  ctaSecondary?:        BiL
+  backgroundType?:      'image' | 'video' | null
+  backgroundImageUrl?:  string | null
+  backgroundVideoUrl?:  string | null
   stats?: Array<{ value: string; labelEn?: string | null; labelEs?: string | null }> | null
+  seoTitle?:            BiL
+  seoDescription?:      BiL
 } | null
 
 export type CmsContact = {
-  whatsapp?:   string | null
-  phone?:      string | null
-  emailSales?: string | null
+  whatsapp?:    string | null
+  phone?:       string | null
+  emailSales?:  string | null
   emailVentas?: string | null
   footerTagline?: BiL
   officePanama?: { address?: string | null; mapsUrl?: string | null } | null
   officeColon?:  { address?: string | null; mapsUrl?: string | null } | null
+} | null
+
+export type CmsSiteSettings = {
+  whatsapp?:      string | null
+  phone?:         string | null
+  emailSales?:    string | null
+  emailVentas?:   string | null
+  footerTagline?: BiL
+  officePanama?:  { address?: string | null; mapsUrl?: string | null } | null
+  officeColon?:   { address?: string | null; mapsUrl?: string | null } | null
+  logoUrl?:       string | null
+  faviconUrl?:    string | null
+  linkedin?:      string | null
+  instagram?:     string | null
+  facebook?:      string | null
+  seoTitle?:      BiL
+  seoDescription?: BiL
+  ogImageUrl?:    string | null
 } | null
 
 export type CmsAbout = {
@@ -47,6 +69,8 @@ export type CmsAbout = {
     headEn?: string | null; headEs?: string | null
     bodyEn?: string | null; bodyEs?: string | null
   }> | null
+  seoTitle?:       BiL
+  seoDescription?: BiL
 } | null
 
 export type CmsCategory = {
@@ -56,17 +80,43 @@ export type CmsCategory = {
   description?: { en?: string | null; es?: string | null } | null
   featured?: boolean | null
   imageUrl?: string | null
+  gallery?: Array<{
+    imageUrl?:  string | null
+    captionEn?: string | null
+    captionEs?: string | null
+  }> | null
+  relatedBrands?: Array<{
+    _id:     string
+    name:    string
+    logoUrl?: string | null
+  }> | null
   order?: number | null
 }
 
 export type CmsBrand = {
   _id:  string
   name: string
-  category?: { en?: string | null; es?: string | null } | null
+  category?:    { en?: string | null; es?: string | null } | null
+  description?: { en?: string | null; es?: string | null } | null
+  specialties?: string[] | null
   featured?: boolean | null
-  logoUrl?: string | null
-  order?: number | null
+  visible?:  boolean | null
+  logoUrl?:  string | null
+  order?:    number | null
 }
+
+export type CmsMissionVision = {
+  badge?:    BiL
+  mission?:  BiL
+  vision?:   BiL
+  values?: Array<{
+    iconKey?: string | null
+    titleEn?: string | null
+    titleEs?: string | null
+    bodyEn?:  string | null
+    bodyEs?:  string | null
+  }> | null
+} | null
 
 export type CmsOpsMap = {
   badge?:      BiL
@@ -79,3 +129,15 @@ export type CmsOpsMap = {
     coordinates?: string | null
   }> | null
 } | null
+
+export type CmsGallery = {
+  _id:       string
+  title?:    { en?: string | null; es?: string | null } | null
+  category?: string | null
+  photos?: Array<{
+    imageUrl?:  string | null
+    captionEn?: string | null
+    captionEs?: string | null
+  }> | null
+  order?: number | null
+}

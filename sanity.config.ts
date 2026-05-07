@@ -20,17 +20,34 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
+            // ── Global ────────────────────────────────────────────────────────
+            S.listItem().title('Site Settings').id('siteSettings')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.divider(),
+
+            // ── Home page ─────────────────────────────────────────────────────
             S.listItem().title('Hero Section').id('hero')
               .child(S.document().schemaType('hero').documentId('hero')),
-            S.listItem().title('About Page').id('aboutContent')
+            S.listItem().title('About / Overview').id('aboutContent')
               .child(S.document().schemaType('aboutContent').documentId('aboutContent')),
-            S.listItem().title('Contact Information').id('contactInfo')
-              .child(S.document().schemaType('contactInfo').documentId('contactInfo')),
+            S.listItem().title('Mission · Vision · Values').id('missionVision')
+              .child(S.document().schemaType('missionVision').documentId('missionVision')),
             S.listItem().title('Operations Map').id('operationsMap')
               .child(S.document().schemaType('operationsMap').documentId('operationsMap')),
             S.divider(),
+
+            // ── Products & Brands ─────────────────────────────────────────────
             S.documentTypeListItem('category').title('Product Categories'),
             S.documentTypeListItem('brand').title('Brands'),
+            S.divider(),
+
+            // ── Gallery ───────────────────────────────────────────────────────
+            S.documentTypeListItem('gallery').title('Gallery Albums'),
+            S.divider(),
+
+            // ── Legacy ────────────────────────────────────────────────────────
+            S.listItem().title('Contact Information (legacy)').id('contactInfo')
+              .child(S.document().schemaType('contactInfo').documentId('contactInfo')),
           ]),
     }),
     visionTool(),

@@ -3,10 +3,10 @@
 import Link from 'next/link'
 import { useLanguage } from '@/lib/LanguageContext'
 import { t, getText } from '@/lib/translations'
-import { pick, type CmsContact } from '@/lib/cms'
+import { pick, type CmsSiteSettings } from '@/lib/cms'
 
 interface FooterProps {
-  cms?: CmsContact
+  cms?: CmsSiteSettings
 }
 
 const PAGES = [
@@ -67,6 +67,29 @@ export default function Footer({ cms }: FooterProps) {
                 {emailSales}
               </a>
             </div>
+            {/* Social links — shown when configured in CMS */}
+            {(cms?.linkedin || cms?.instagram || cms?.facebook) && (
+              <div className="flex gap-3 mt-5">
+                {cms.linkedin && (
+                  <a href={cms.linkedin} target="_blank" rel="noopener noreferrer"
+                    className="font-body text-[10px] tracking-[0.14em] uppercase text-white/30 hover:text-white transition-colors">
+                    LinkedIn
+                  </a>
+                )}
+                {cms.instagram && (
+                  <a href={cms.instagram} target="_blank" rel="noopener noreferrer"
+                    className="font-body text-[10px] tracking-[0.14em] uppercase text-white/30 hover:text-white transition-colors">
+                    Instagram
+                  </a>
+                )}
+                {cms.facebook && (
+                  <a href={cms.facebook} target="_blank" rel="noopener noreferrer"
+                    className="font-body text-[10px] tracking-[0.14em] uppercase text-white/30 hover:text-white transition-colors">
+                    Facebook
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Navigation */}

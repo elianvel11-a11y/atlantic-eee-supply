@@ -5,7 +5,7 @@ import { LanguageProvider } from '@/lib/LanguageContext'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import { getContactInfo } from '../../sanity/lib/queries'
+import { getSiteSettings } from '../../sanity/lib/queries'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     'SOLAS safety equipment Panama',
     'marine valves packing Panama',
   ],
-  authors: [{ name: 'Atlantic EEE Supply S.A.' }],
-  creator: 'Atlantic EEE Supply S.A.',
+  authors:   [{ name: 'Atlantic EEE Supply S.A.' }],
+  creator:   'Atlantic EEE Supply S.A.',
   publisher: 'Atlantic EEE Supply S.A.',
   openGraph: {
-    type:   'website',
-    locale: 'en_US',
+    type:            'website',
+    locale:          'en_US',
     alternateLocale: ['es_PA'],
     title:       'Atlantic EEE Supply S.A. | Maritime Supply — Panama',
     description: 'Maritime and industrial supply for vessels operating through the Panama Canal. Pacific and Atlantic access.',
@@ -118,7 +118,7 @@ const jsonLd = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const contact = await getContactInfo()
+  const settings = await getSiteSettings()
 
   return (
     <html
@@ -136,7 +136,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <LanguageProvider>
           <Navbar />
           {children}
-          <Footer cms={contact} />
+          <Footer cms={settings} />
           <WhatsAppButton />
         </LanguageProvider>
       </body>
