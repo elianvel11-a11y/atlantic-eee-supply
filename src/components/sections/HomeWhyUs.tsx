@@ -19,12 +19,8 @@ export default function HomeWhyUs() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="bg-navy py-24 relative overflow-hidden" ref={ref}>
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
-        style={{ backgroundImage: 'url(/images/vessel-supply-ops.jpg)' }}
-      />
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="bg-navy py-24" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
             <motion.p
@@ -43,19 +39,6 @@ export default function HomeWhyUs() {
             >
               {getText(t.why.headline, lang).replace('\n', ' ')}
             </motion.h2>
-            {/* Maritime photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="relative mt-8 h-52 rounded-lg overflow-hidden hidden lg:block"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: 'url(/images/harbor-cranes.jpg)' }}
-              />
-              <div className="absolute inset-0 bg-navy/35" />
-            </motion.div>
           </div>
 
           <div className="flex flex-col gap-8">

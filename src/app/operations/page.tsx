@@ -132,24 +132,11 @@ export default function OperationsPage() {
         label={lang === 'es' ? 'PRESENCIA OPERACIONAL' : 'OPERATIONAL PRESENCE'}
         title={lang === 'es' ? 'Dónde operamos.' : 'Where we operate.'}
         subtitle={getText(t.map.sub, lang)}
-        image="/images/port-aerial.jpg"
       />
       {/* Interactive map in dark section */}
       <section className="bg-[#07070C]">
         <PresenceMapClient />
       </section>
-      {/* Canal photo strip */}
-      <div
-        className="h-64 bg-cover bg-center relative"
-        style={{ backgroundImage: 'url(/images/canal-locks.jpg)' }}
-      >
-        <div className="absolute inset-0 bg-navy/40" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="font-body text-white/50 text-[11px] tracking-[0.3em] uppercase">
-            {lang === 'es' ? 'Canal de Panamá · Acceso Atlántico y Pacífico' : 'Panama Canal · Atlantic & Pacific Access'}
-          </p>
-        </div>
-      </div>
       <CoverageDetails />
     </main>
   )

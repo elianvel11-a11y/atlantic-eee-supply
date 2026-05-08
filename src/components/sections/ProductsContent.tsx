@@ -22,22 +22,15 @@ const ICON_MAP: Record<string, React.ElementType> = {
 }
 
 const IMG_MAP: Record<string, string> = {
-  packing:    '/images/product-packing.jpg',
-  valves:     '/images/product-pipes.jpg',
-  safety:     '/images/product-ppe.jpg',
-  tools:      '/images/product-tools.jpg',
-  hand:       '/images/product-tools.jpg',
-  hose:       '/images/product-hose.jpg',
-  rope:       '/images/product-rope.jpg',
-  electrical: '/images/product-electrical.jpg',
-  measuring:  '/images/product-industrial.jpg',
-  clothing:   '/images/product-workwear.jpg',
+  packing: '/images/product-packing.jpg',
+  valves:  '/images/product-valves.jpg',
+  safety:  '/images/product-safety-2.jpg',
 }
 
 const FALLBACK_FEATURED: { key: CatKey; icon: React.ElementType; img: string }[] = [
-  { key: 'packing', icon: Pipette, img: '/images/product-packing.jpg' },
-  { key: 'valves',  icon: Gauge,   img: '/images/product-pipes.jpg'   },
-  { key: 'safety',  icon: Shield,  img: '/images/product-ppe.jpg'     },
+  { key: 'packing', icon: Pipette, img: '/images/product-packing.jpg'  },
+  { key: 'valves',  icon: Gauge,   img: '/images/product-valves.jpg'   },
+  { key: 'safety',  icon: Shield,  img: '/images/product-safety-2.jpg' },
 ]
 
 const FALLBACK_STANDARD: { key: CatKey; icon: React.ElementType }[] = [

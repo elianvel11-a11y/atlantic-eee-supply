@@ -209,12 +209,8 @@ function QualityStatementSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="bg-navy py-20 relative overflow-hidden" ref={ref}>
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.08]"
-        style={{ backgroundImage: 'url(/images/construction-ops.jpg)' }}
-      />
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="bg-navy py-20" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <motion.p
