@@ -11,7 +11,7 @@ interface PageHeroProps {
 
 export default function PageHero({ label, title, subtitle, image }: PageHeroProps) {
   return (
-    <section className="relative bg-navy pt-40 pb-20 overflow-hidden">
+    <section className="relative bg-navy pt-52 pb-20 overflow-hidden">
       {/* Background image (optional) */}
       {image && (
         <>

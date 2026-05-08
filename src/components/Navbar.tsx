@@ -29,7 +29,7 @@ export default function Navbar({ logoUrl }: NavbarProps) {
   const isHome = pathname === '/'
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 96)
+    const onScroll = () => setScrolled(window.scrollY > 144)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -45,16 +45,16 @@ export default function Navbar({ logoUrl }: NavbarProps) {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20 lg:h-24">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-24 lg:h-36">
           {/* Logo */}
           <Link href="/" className="flex items-center leading-none shrink-0">
             {logoUrl ? (
               <Image
                 src={logoUrl}
                 alt="Atlantic EEE Supply"
-                height={80}
-                width={400}
-                className="h-16 lg:h-20 w-auto object-contain"
+                height={128}
+                width={168}
+                className="h-20 lg:h-32 w-auto object-contain"
                 priority
               />
             ) : (
