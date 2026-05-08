@@ -40,6 +40,11 @@ export const metadata: Metadata = {
     'SOLAS safety equipment Panama',
     'marine valves packing Panama',
   ],
+  icons: {
+    icon:     [{ url: '/icon.png', type: 'image/png', sizes: '512x512' }],
+    shortcut: '/icon.png',
+    apple:    [{ url: '/icon.png', sizes: '512x512', type: 'image/png' }],
+  },
   authors:   [{ name: 'Atlantic EEE Supply S.A.' }],
   creator:   'Atlantic EEE Supply S.A.',
   publisher: 'Atlantic EEE Supply S.A.',
@@ -134,9 +139,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {settings?.faviconUrl && (
-          <link rel="icon" href={settings.faviconUrl} />
-        )}
       </head>
       <body>
         <LanguageProvider>
