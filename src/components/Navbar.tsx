@@ -52,9 +52,9 @@ export default function Navbar({ logoUrl }: NavbarProps) {
               <Image
                 src={logoUrl}
                 alt="Atlantic EEE Supply"
-                height={36}
-                width={180}
-                className="h-9 w-auto object-contain"
+                height={48}
+                width={240}
+                className="h-10 sm:h-12 w-auto object-contain"
                 priority
               />
             ) : (
