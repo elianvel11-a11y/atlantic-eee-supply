@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
@@ -16,7 +17,11 @@ const NAV_LINKS = [
   { href: '/contact',    labelKey: 'contact'    as const },
 ]
 
-export default function Navbar() {
+interface NavbarProps {
+  logoUrl?: string | null
+}
+
+export default function Navbar({ logoUrl }: NavbarProps) {
   const { lang, setLang } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -42,17 +47,30 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex flex-col leading-none shrink-0">
-            <span className={`font-display font-semibold text-[13px] tracking-[0.16em] uppercase transition-colors duration-300 ${
-              solid ? 'text-navy' : 'text-white'
-            }`}>
-              Atlantic EEE Supply
-            </span>
-            <span className={`font-body text-[9px] tracking-[0.3em] uppercase transition-colors duration-300 ${
-              solid ? 'text-stone' : 'text-white/45'
-            }`}>
-              S.A. — Panama
-            </span>
+          <Link href="/" className="flex items-center leading-none shrink-0">
+            {logoUrl ? (
+              <Image
+                src={logoUrl}
+                alt="Atlantic EEE Supply"
+                height={36}
+                width={180}
+                className="h-9 w-auto object-contain"
+                priority
+              />
+            ) : (
+              <span className="flex flex-col">
+                <span className={`font-display font-semibold text-[13px] tracking-[0.16em] uppercase transition-colors duration-300 ${
+                  solid ? 'text-navy' : 'text-white'
+                }`}>
+                  Atlantic EEE Supply
+                </span>
+                <span className={`font-body text-[9px] tracking-[0.3em] uppercase transition-colors duration-300 ${
+                  solid ? 'text-stone' : 'text-white/45'
+                }`}>
+                  S.A. — Panama
+                </span>
+              </span>
+            )}
           </Link>
 
           {/* Desktop nav */}

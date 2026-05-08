@@ -131,10 +131,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {settings?.faviconUrl && (
+          <link rel="icon" href={settings.faviconUrl} />
+        )}
       </head>
       <body>
         <LanguageProvider>
-          <Navbar />
+          <Navbar logoUrl={settings?.logoUrl ?? null} />
           {children}
           <Footer cms={settings} />
           <WhatsAppButton />
