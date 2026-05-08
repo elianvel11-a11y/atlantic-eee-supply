@@ -102,6 +102,11 @@ export default function MissionVision({ cms }: Props) {
       className="relative py-32 overflow-hidden"
       style={{ background: '#07080F' }}
     >
+      {/* Background photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
+        style={{ backgroundImage: 'url(/images/aerial-cargo-ship.jpg)' }}
+      />
       {/* Subtle radial atmosphere */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(26,82,152,0.10),transparent)] pointer-events-none" />
 

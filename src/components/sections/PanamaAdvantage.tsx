@@ -12,6 +12,11 @@ export default function PanamaAdvantage() {
 
   return (
     <section className="py-32 bg-charcoal relative overflow-hidden">
+      {/* Background photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.10]"
+        style={{ backgroundImage: 'url(/images/canal-locks.jpg)' }}
+      />
       {/* Deep navy gradient overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(0,0,128,0.25),transparent)]" />
 

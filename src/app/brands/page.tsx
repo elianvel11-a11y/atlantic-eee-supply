@@ -24,6 +24,7 @@ export default async function BrandsPage() {
           title: 'Las marcas detrás de cada pedido.',
           subtitle: 'Trabajamos exclusivamente con fabricantes establecidos. Sin sustitutos.',
         }}
+        image="/images/industrial-interior.jpg"
       />
       <BrandsContent cms={brands} />
     </main>

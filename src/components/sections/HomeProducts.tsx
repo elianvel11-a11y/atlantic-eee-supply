@@ -8,9 +8,9 @@ import { useLanguage } from '@/lib/LanguageContext'
 import { t, getText } from '@/lib/translations'
 
 const featured = [
-  { key: 'packing', img: '/images/product-packing.jpg'  },
-  { key: 'valves',  img: '/images/product-valves.jpg'   },
-  { key: 'safety',  img: '/images/product-safety-2.jpg' },
+  { key: 'packing', img: '/images/product-packing.jpg' },
+  { key: 'valves',  img: '/images/product-pipes.jpg'   },
+  { key: 'safety',  img: '/images/product-ppe.jpg'     },
 ] as const
 
 export default function HomeProducts() {

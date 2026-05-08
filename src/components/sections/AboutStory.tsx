@@ -70,28 +70,45 @@ export default function AboutStory({ cms }: Props) {
             </motion.p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.14 }}
-            className="bg-offwhite rounded-xl p-8 lg:p-10"
-          >
-            <div className="grid grid-cols-2 gap-8 mb-8">
-              {statItems.map(({ value, label }) => (
-                <div key={label} className="border-t border-ink/[0.1] pt-5">
-                  <p className="font-display font-semibold text-2xl text-ink mb-1">{value}</p>
-                  <p className="font-body text-stone text-[12px] leading-relaxed">{label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-ink/[0.1] pt-6">
-              <p className="font-body text-stone text-[13px] leading-relaxed">
-                {lang === 'es'
-                  ? 'Respondemos en menos de 24 horas. Contáctanos por WhatsApp, teléfono o correo.'
-                  : 'We respond within 24 hours. Reach us by WhatsApp, phone, or email.'}
-              </p>
-            </div>
-          </motion.div>
+          <div className="flex flex-col gap-5">
+            {/* Maritime photo */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 }}
+              className="relative h-52 rounded-xl overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: 'url(/images/about-maritime-ops.jpg)' }}
+              />
+              <div className="absolute inset-0 bg-navy/15" />
+            </motion.div>
+
+            {/* Stats panel */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.18 }}
+              className="bg-offwhite rounded-xl p-8 lg:p-10"
+            >
+              <div className="grid grid-cols-2 gap-8 mb-8">
+                {statItems.map(({ value, label }) => (
+                  <div key={label} className="border-t border-ink/[0.1] pt-5">
+                    <p className="font-display font-semibold text-2xl text-ink mb-1">{value}</p>
+                    <p className="font-body text-stone text-[12px] leading-relaxed">{label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-ink/[0.1] pt-6">
+                <p className="font-body text-stone text-[13px] leading-relaxed">
+                  {lang === 'es'
+                    ? 'Respondemos en menos de 24 horas. Contáctanos por WhatsApp, teléfono o correo.'
+                    : 'We respond within 24 hours. Reach us by WhatsApp, phone, or email.'}
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
