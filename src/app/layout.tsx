@@ -117,6 +117,9 @@ const jsonLd = {
   sameAs: [],
 }
 
+// ISR: revalidate layout data (logo, social links, etc.) from Sanity every 60 s
+export const revalidate = 60
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
 
